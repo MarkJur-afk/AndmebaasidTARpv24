@@ -34,3 +34,70 @@ select * from opilane;
 --andmete uuendamine
 update opilane set aadres='Tallinn'
 where opilaneId=3
+
+-------------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE language
+(
+ID int NOT NULL PRIMARY KEY,
+Code char(3) NOT NULL,
+Language varchar(50) NOT NULL,
+IsOfficial bit,
+Percentage smallint
+);
+select * from language;
+
+insert into language(ID, Code, Language)
+values (2, 'RUS', 'vene'), (3, 'ENG', 'inglise'), (4, 'DE', 'saksa')
+
+create table keelevalik
+(
+keelevalikID int primary key identity(1,1),
+valikuNimetus varchar(10) not null,
+opilaneId int,
+Foreign key (opilaneId) references opilane(opilaneId),
+language int,
+Foreign key (language) references language(ID)
+)
+select * from keelevalik;
+select * from language;
+select * from opilane;
+
+insert into keelevalik(valikuNimetus, opilaneId, language)
+values
+('valik B', 1, 2), ('valik D', 1, 4),
+('valik A', 2, 1), ('valik B', 2, 2),
+('valik C', 3, 3), ('valik D', 3, 4),
+('valik A', 5, 1), ('valik D', 5, 4)
+
+select * from opilane, language, keelevalik
+where opilane.opilaneId=keelevalik.opilaneId
+and language.ID=keelevalik.language
+
+select opilane.eesnimi, language.Language
+from opilane, language, keelevalik
+where opilane.opilaneId=keelevalik.opilaneId
+and language.ID=keelevalik.language
+
+delete from keelevalik where keelevalikID=9;
+
+create table oppimine1 
+(
+oppimineID int primary key identity(1,1),
+aine varchar(15) not null,
+aasta date, 
+opetaja varchar(25) not null,
+Foreign key (oppimineID) references opilane(opilaneId),
+hinne int
+)
+insert into oppimine1(aine, aasta, opetaja, hinne)
+values
+('matemaatika', '2025-12-12', 'Opetaja', 4), ('matemaatika2', '2025-12-12', 'Opetaja2', 5),
+('matemaatika3', '2025-12-12', 'Opetaja3', 5), ('matemaatika4', '2025-12-12', 'Opetaja4', 3);
+
+delete from oppimine
+
+select * from keelevalik;
+select * from language;
+select * from opilane;
+select * from oppimine;
