@@ -65,3 +65,24 @@ end;
 exec linnaOtsing T;
 --------------------------------------------------------------------------------------------------------
 kasutame XAMPP / localhost
+
+create database protseduurJurgen;
+use protseduurJurgen;
+
+create table linn(
+linnId int primary key auto_increment,
+linnNimi varchar(30),
+raahvaArv int);
+-- код для визуального создания процедуры(функции)
+select * from linn;
+insert into linn(linnNimi, raahvaArv)
+Values 
+('Tallinn', 600000), ('Tartu', 300000), ('Narva', 200000)
+
+begin 
+
+insert into linn(linnNimi, raahvaArv)
+values (Lnimi, rArv);
+select * from linn;
+
+end;
