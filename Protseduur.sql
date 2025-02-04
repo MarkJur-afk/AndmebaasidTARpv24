@@ -63,6 +63,21 @@ where linnNimi like @taht + '%';
 end;
 
 exec linnaOtsing T;
+
+create procedure rahvaArvuUuendus
+@linnId int,
+@koef decimal(2,1)
+
+as
+begin
+select * from linn;
+update linn set raahvaArv=raahvaArv*@koef
+where linnId=@linnId;
+select * from linn;
+end;
+
+exec rahvaArvuUuendus 7, 1.2;
+drop procedure rahvaArvuUuendus;
 --------------------------------------------------------------------------------------------------------
 kasutame XAMPP / localhost
 
