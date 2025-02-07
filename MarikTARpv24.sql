@@ -79,3 +79,31 @@ exec veeruLisaKustutaTabelis  @valik= 'add', @tabel='linn', @veerunimi='test3', 
 exec veeruLisaKustutaTabelis  @valik='drop', @tabel='linn', @veerunimi='test3';
 select * from linn;
 drop procedure veeruLisaKustutaTabelis
+
+create procedure rahvaHinnaga
+@piir int
+
+
+
+as
+
+begin
+select linnNimi, raahvaArv, iif(raahvaArv<@piir, 'väike linn', 'suur linn') as Hinnang
+from linn;
+
+end;
+drop procedure rahvaHinnaga;
+exec rahvaHinnaga 9000;
+
+--agrigat funktsioonid sum(), avg(), min(), max(), count()
+
+create procedure kokkuRahvaarv
+
+as
+begin
+select sum(raahvaArv) as 'kokku rahvaArv', avg(raahvaArv) as 'keskmine rahvaArv', min(raahvaArv) as 'Min rahvaArv', max(raahvaArv) as 'Max RahvaArv'
+from linn;
+
+end;
+drop procedure kokkuRahvaarv;
+exec kokkuRahvaarv;
