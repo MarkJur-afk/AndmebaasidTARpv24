@@ -1,0 +1,12 @@
+>cd
+>cd ..
+:c - перейти на диск
+git config --global user.name "MarkJurgen"
+git config --global user.email "markjurgennn@gmail.com"
+git config --global --list
+git branch MarkJurgen
+git status
+git add . 
+git push
+git push --set-upstream origin MarkJurgen
+git commit -a -m ""
