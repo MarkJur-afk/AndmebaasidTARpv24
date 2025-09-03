@@ -73,3 +73,18 @@ where linnID=2;
 select * from linnad;
 select * from logi;
 
+disable trigger linnaLisamine on linnad
+--kontrolli
+insert into linnad (linnanimi, rahvaarv)
+values ('Tartu', 300000);
+select * from linnad;
+select * from logi;
+
+enable trigger linnaLisamine on linnad
+
+--Kasutaja nimega sekretarMarkJurgen parooliga 'kala' 
+--ja sekretarMarkJurgen ei näe tabeli logi ja ei saa trigerid muuta/kustutada
+
+grant delete, update on linnad to sekretarMarkJurgen;
+
+drop trigger linnaKustutamine;
